@@ -1,135 +1,95 @@
-
-
-
 <!DOCTYPE html>
-<html>
+<html lang="he">
 <head>
-    <title>Responsive Iframes Example</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-			background-color: white;
-        }
-        
-        #main-frame {
-            width: 80%;
-            height: 85%;
-            border: none;
-            float: left;
-        }
-		
-		
+  <meta charset="UTF-8">
+  <title>לובי - חיים הרצוג 29</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      direction: rtl;
+    }
 
-        
-        #side-frame-text {
-            width: 15%;
-            height: 70%;
-            border: none;
-            float: left;
-        }
-        
-		#side-frame-logo {
-            width: 20%;
-            height: 80%;
-            border: none;
-            float: right;
-        }
-		
-		
-       #bottom-frame {
-            width: 80%;
-            height: 25%; /* Adjust the height as needed */
-            border: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-		
+    header {
+      background-color: #004f7c;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 2em;
+    }
 
-		
-        @media (max-width: 600px) {
-            /* Adjust the width for smaller screens */
-            #main-frame, #side-frame {
-                width: 100%;
-                float: none;
-            }
-        }
-    </style>
-	
-	
-	
-	
-	
-	
-	  <style>
-      .clock {
-        background-color: white;
-        text-align: center;
-        margin-top: 10px;
-        font-size: 48px;
-        font-family: "Arial", sans-serif;
-        display: inline-block; /* Add this line */
-        vertical-align: top; /* Add this line */
-      }
+    #clock {
+      font-size: 0.8em;
+    }
 
-      .time {
-        color: #333;
-		align: center;
-      }
+    #container {
+      display: flex;
+      height: calc(100vh - 150px);
+    }
 
-   
-    </style>
+    #main-frame {
+      flex: 2;
+      border: none;
+    }
 
-<style>
-  body { margin:0; background:#fff; font-family: Arial, sans-serif; color:#333; }
-  header { background:#004f7c; color:#fff; padding:20px; text-align:center; font-size:3em; display:flex; justify-content:space-between; align-items:center; }
-  #logo { font-weight:bold; }
-  #clock { font-size:0.8em; }
-  #main { display:flex; padding:20px; }
-  #news { flex:2; font-size:2em; line-height:1.3; padding:0 20px; }
-  #weather { flex:1; }
-  iframe { border:none; width:100%; height:100%; }
-  footer { padding:10px; text-align:center; font-size:1.2em; background:#eee; }
-</style>
+    #side-frame-text {
+      width: 300px;
+      border: none;
+    }
 
+    #bottom-frame {
+      width: 100%;
+      height: 150px;
+      border: none;
+    }
 
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      background: #eee;
+      padding: 10px;
+      font-size: 1em;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    
     <div id="clock">--:--:--</div>
-	<div id="logo">ברוכים הבאים לחיים הרצוג 29</div>
-	
+    <div id="logo">ברוכים הבאים לחיים הרצוג 29</div>
   </header>
 
-	
-	<!--START set up on Regular day -->
-	<iframe id="main-frame" src="main.html"scrolling="no"> </iframe>
-    <!--END set up on Regular day -->
+  <div id="container">
+    <iframe id="main-frame" src="main.html"></iframe>
+    <iframe id="side-frame-text" src="text.html"></iframe>
+  </div>
 
+  <iframe id="bottom-frame" src="weather.html"></iframe>
 
+  <footer>
+    לובי הבניין
+  </footer>
 
-    <iframe id="side-frame-text" src="text.html"scrolling="no"> </iframe>
-	 <iframe id="bottom-frame" src="weather.html" scrolling="no"> </iframe>
-	 
-	 
-	
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+    }
 
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 
-<script>
-  function updateClock(){
-    const now = new Date();
-    const h = String(now.getHours()).padStart(2,'0');
-    const m = String(now.getMinutes()).padStart(2,'0');
-    const s = String(now.getSeconds()).padStart(2,'0');
-    document.getElementById('clock').textContent = `${h}:${m}:${s}`;
-  }
-  setInterval(updateClock,1000);
-  updateClock();
-</script>
-	 
 </body>
 </html>

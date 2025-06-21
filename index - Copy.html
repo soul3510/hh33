@@ -27,35 +27,29 @@
 
     #container {
       display: flex;
-      height: calc(100vh - 230px);
+      height: calc(100vh - 150px);
     }
 
     #main-frame {
       flex: 2;
+      border: none;
     }
 
     #side-frame-text {
       width: 300px;
+      border: none;
     }
 
     #bottom-frame {
       width: 100%;
       height: 150px;
+      border: none;
     }
 
     iframe {
       width: 100%;
       height: 100%;
       border: none;
-    }
-
-    #news-box {
-      background-color: #f4f4f4;
-      padding: 20px;
-      text-align: center;
-      font-size: 2em;
-      height: 80px;
-      overflow: hidden;
     }
 
     footer {
@@ -78,8 +72,6 @@
     <iframe id="side-frame-text" src="text.html"></iframe>
   </div>
 
-  <div id="news-box">טוען עדכונים...</div>
-
   <iframe id="bottom-frame" src="weather.html"></iframe>
 
   <footer>
@@ -87,7 +79,6 @@
   </footer>
 
   <script>
-    // עדכון שעה
     function updateClock() {
       const now = new Date();
       const h = String(now.getHours()).padStart(2, '0');
@@ -98,37 +89,6 @@
 
     setInterval(updateClock, 1000);
     updateClock();
-
-    // טעינת הודעות מ-news.html
-    let newsItems = [];
-    let currentNewsIndex = 0;
-
-    function loadNews() {
-      fetch('news.html')
-        .then(res => res.text())
-        .then(html => {
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = html;
-          const items = tempDiv.querySelectorAll('li');
-          newsItems = Array.from(items).map(item => item.textContent.trim());
-          if (newsItems.length > 0) {
-            displayNews();
-            setInterval(displayNews, 5000);
-          } else {
-            document.getElementById('news-box').textContent = "אין הודעות להצגה כרגע.";
-          }
-        })
-        .catch(() => {
-          document.getElementById('news-box').textContent = "שגיאה בטעינת הודעות.";
-        });
-    }
-
-    function displayNews() {
-      document.getElementById('news-box').textContent = newsItems[currentNewsIndex];
-      currentNewsIndex = (currentNewsIndex + 1) % newsItems.length;
-    }
-
-    loadNews();
   </script>
 
 </body>
